@@ -1,6 +1,6 @@
 package com.craftAlgo.imageCompression.controller;
 
-import com.craftAlgo.imageCompression.controller.service.ImageCompressingService;
+import com.craftAlgo.imageCompression.service.ImageCompressingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -24,7 +24,7 @@ public class FileCompressionController {
     @Value("${image.upload.directory}")
     private String uploadDir;
 
-    private final Path storageLocation = Paths.get("/Users/DELL/Downloads/imageCompression/imageCompression/result").toAbsolutePath().normalize();
+    private final Path storageLocation = Paths.get("./result").toAbsolutePath().normalize();
     private ImageCompressingService imageCompressingService;
 
     @Autowired
@@ -41,7 +41,9 @@ public class FileCompressionController {
 
         // Check the upload directory is available or not...?
         File directory = new File(uploadDir);
+
         if(!directory.exists()){
+            System.out.println(uploadDir);
             directory.mkdirs();
         }
 
